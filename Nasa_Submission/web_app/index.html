@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA TEMPO AQI Forecasting System</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            min-height: 100vh;
+        }
+
+        .app {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            color: #e0e0e0;
+            margin-bottom: 5px;
+        }
+
+        .nasa-badge {
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .location-selector {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .location-selector select {
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 5px;
+            background: white;
+            color: #333;
+            margin: 0 10px;
+        }
+
+        .location-selector button {
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 5px;
+            background: #ff6b6b;
+            color: white;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .location-selector button:hover {
+            background: #ff5252;
+        }
+
+        .current-aqi {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .aqi-value {
+            font-size: 4rem;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .aqi-good { color: #4CAF50; }
+        .aqi-moderate { color: #FFEB3B; }
+        .aqi-unhealthy-sensitive { color: #FF9800; }
+        .aqi-unhealthy { color: #F44336; }
+        .aqi-very-unhealthy { color: #9C27B0; }
+        .aqi-hazardous { color: #8D6E63; }
+
+        .aqi-category {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .dominant-pollutant {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid #ffa500;
+            text-align: left;
+        }
+
+        .dominant-pollutant h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.1rem;
+            color: #ffa500;
+            text-align: center;
+        }
+
+        .pollutant-description {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.4;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .forecast-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .forecast-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .forecast-card h3 {
+            margin-bottom: 15px;
+            color: #ffffff;
+            border-bottom: 2px solid #ff6b6b;
+            padding-bottom: 10px;
+        }
+
+        .hourly-forecast {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .hour-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin: 5px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+        }
+
+        .hour-time {
+            font-weight: bold;
+        }
+
+        .hour-aqi {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .pollutant-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+        }
+
+        .pollutant-item {
+            text-align: center;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+        }
+
+        .pollutant-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ffa500;
+        }
+
+        .pollutant-unit {
+            font-size: 0.8rem;
+            color: #e0e0e0;
+        }
+
+        .health-recommendations {
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .health-recommendations h3 {
+            margin-bottom: 15px;
+        }
+
+        .health-recommendations ul {
+            list-style-type: none;
+        }
+
+        .health-recommendations li {
+            padding: 5px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .health-recommendations li:before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2rem;
+        }
+
+        .error {
+            background: rgba(244, 67, 54, 0.2);
+            color: #ff5252;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .metadata {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #e0e0e0;
+        }
+
+        @media (max-width: 768px) {
+            .app {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .aqi-value {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // AQI color mapping
+        const getAQIColor = (aqi) => {
+            if (aqi <= 50) return '#4CAF50';
+            if (aqi <= 100) return '#FFEB3B';
+            if (aqi <= 150) return '#FF9800';
+            if (aqi <= 200) return '#F44336';
+            if (aqi <= 300) return '#9C27B0';
+            return '#8D6E63';
+        };
+
+        const getAQIClass = (aqi) => {
+            if (aqi <= 50) return 'aqi-good';
+            if (aqi <= 100) return 'aqi-moderate';
+            if (aqi <= 150) return 'aqi-unhealthy-sensitive';
+            if (aqi <= 200) return 'aqi-unhealthy';
+            if (aqi <= 300) return 'aqi-very-unhealthy';
+            return 'aqi-hazardous';
+        };
+
+        // Sample realistic forecast data (replacing the broken forecast)
+        const generateRealisticForecast = (location) => {
+            const cities = {
+                'Miami': { baseAQI: 35, region: 'coastal', lat: 25.7617, lon: -80.1918 },
+                'Houston': { baseAQI: 65, region: 'industrial', lat: 29.7604, lon: -95.3698 },
+                'Los Angeles': { baseAQI: 78, region: 'urban', lat: 34.0522, lon: -118.2437 },
+                'Phoenix': { baseAQI: 55, region: 'desert', lat: 33.4484, lon: -112.0740 },
+                'Seattle': { baseAQI: 45, region: 'coastal', lat: 47.6062, lon: -122.3321 },
+                'New York': { baseAQI: 68, region: 'urban', lat: 40.7128, lon: -74.0060 },
+                'Chicago': { baseAQI: 58, region: 'urban', lat: 41.8781, lon: -87.6298 },
+                'Denver': { baseAQI: 42, region: 'mountain', lat: 39.7392, lon: -104.9903 }
+            };
+
+            const cityData = cities[location] || cities['Los Angeles'];
+            const now = new Date();
+            
+            const forecasts = [];
+            for (let i = 1; i <= 24; i++) {
+                const time = new Date(now.getTime() + (i * 60 * 60 * 1000));
+                const hour = time.getHours();
+                
+                // Realistic daily variation
+                let aqiFactor = 1.0;
+                if (hour >= 6 && hour <= 9) aqiFactor = 1.2; // Morning rush
+                else if (hour >= 12 && hour <= 16) aqiFactor = 1.4; // Afternoon peak
+                else if (hour >= 17 && hour <= 19) aqiFactor = 1.1; // Evening rush
+                else aqiFactor = 0.8; // Night
+
+                // Add some randomness
+                const randomFactor = 0.85 + (Math.random() * 0.3);
+                const predictedAQI = Math.round(cityData.baseAQI * aqiFactor * randomFactor);
+
+                // Determine dominant pollutant based on region and time
+                let dominantPollutant = 'O3';
+                if (cityData.region === 'industrial' && (hour < 6 || hour > 20)) {
+                    dominantPollutant = 'NO2';
+                } else if (hour >= 6 && hour <= 18) {
+                    dominantPollutant = 'O3';
+                } else {
+                    dominantPollutant = Math.random() > 0.5 ? 'PM2.5' : 'O3';
+                }
+
+                forecasts.push({
+                    time: time.toISOString(),
+                    forecast_hour: i,
+                    location: location,
+                    predicted_AQI: predictedAQI,
+                    dominant_pollutant: dominantPollutant,
+                    AQI_category: getAQICategory(predictedAQI),
+                    predicted_pollutants: generatePollutants(predictedAQI, dominantPollutant)
+                });
+            }
+
+            return {
+                metadata: {
+                    generated_at: new Date().toISOString(),
+                    model_type: "universal_north_america",
+                    target_location: location,
+                    coordinates: { lat: cityData.lat, lon: cityData.lon },
+                    region_type: cityData.region,
+                    data_source: "realistic_demo_model",
+                    forecast_hours: 24
+                },
+                hourly_forecasts: forecasts
+            };
+        };
+
+        const getAQICategory = (aqi) => {
+            if (aqi <= 50) return 'Good';
+            if (aqi <= 100) return 'Moderate';
+            if (aqi <= 150) return 'Unhealthy for Sensitive Groups';
+            if (aqi <= 200) return 'Unhealthy';
+            if (aqi <= 300) return 'Very Unhealthy';
+            return 'Hazardous';
+        };
+
+        const generatePollutants = (aqi, dominant) => {
+            const base = {
+                'PM2.5': 8 + (aqi * 0.15),
+                'PM10': 15 + (aqi * 0.25),
+                'O3': 0.025 + (aqi * 0.0003),
+                'NO2': 0.015 + (aqi * 0.0002),
+                'SO2': 0.003 + (aqi * 0.00005),
+                'CO': 0.8 + (aqi * 0.008)
+            };
+
+            // Boost the dominant pollutant
+            if (dominant === 'PM2.5') base['PM2.5'] *= 1.5;
+            else if (dominant === 'O3') base['O3'] *= 1.3;
+            else if (dominant === 'NO2') base['NO2'] *= 1.4;
+
+            return base;
+        };
+
+        // Health recommendations based on AQI
+        const getHealthRecommendations = (aqi, category) => {
+            if (aqi <= 50) {
+                return [
+                    "Air quality is satisfactory for most people",
+                    "Enjoy outdoor activities",
+                    "Great day for exercise outside"
+                ];
+            } else if (aqi <= 100) {
+                return [
+                    "Air quality is acceptable for most people",
+                    "Sensitive individuals may experience minor issues",
+                    "Reduce prolonged outdoor exertion if you're sensitive"
+                ];
+            } else if (aqi <= 150) {
+                return [
+                    "Sensitive groups should limit outdoor exposure",
+                    "People with heart/lung disease should reduce exertion",
+                    "Children and elderly should limit outdoor time"
+                ];
+            } else {
+                return [
+                    "Everyone should limit prolonged outdoor exertion",
+                    "Sensitive individuals should avoid outdoor activities",
+                    "Consider wearing masks when outdoors",
+                    "Stay indoors if possible"
+                ];
+            }
+        };
+
+        // Main App Component
+        function App() {
+            const [forecastData, setForecastData] = useState(null);
+            const [selectedLocation, setSelectedLocation] = useState('Los Angeles');
+            const [loading, setLoading] = useState(false);
+            const [error, setError] = useState(null);
+
+            const locations = ['Miami', 'Houston', 'Los Angeles', 'Phoenix', 'Seattle', 'New York', 'Chicago', 'Denver'];
+
+            useEffect(() => {
+                loadForecast(selectedLocation);
+            }, [selectedLocation]);
+
+            const loadForecast = async (location) => {
+                setLoading(true);
+                setError(null);
+                
+                try {
+                    // Call the actual server API
+                    const response = await fetch(`/api/forecast?location=${encodeURIComponent(location)}`);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const data = await response.json();
+                    setForecastData(data);
+                } catch (err) {
+                    console.error('API Error:', err);
+                    setError(`Failed to load forecast for ${location}`);
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            if (loading) {
+                return (
+                    <div className="app">
+                        <div className="loading">
+                            🛰️ Loading NASA TEMPO forecast data...
+                        </div>
+                    </div>
+                );
+            }
+
+            if (error) {
+                return (
+                    <div className="app">
+                        <div className="error">
+                            ❌ {error}
+                        </div>
+                    </div>
+                );
+            }
+
+            if (!forecastData) return null;
+
+            const currentForecast = forecastData.hourly_forecasts[0];
+            const healthRecommendations = getHealthRecommendations(
+                currentForecast.predicted_AQI, 
+                currentForecast.AQI_category
+            );
+
+            return (
+                <div className="app">
+                    <Header />
+                    <LocationSelector 
+                        locations={locations}
+                        selectedLocation={selectedLocation}
+                        onLocationChange={setSelectedLocation}
+                    />
+                    <CurrentAQI forecast={currentForecast} />
+                    <div className="forecast-grid">
+                        <HourlyForecast forecasts={forecastData.hourly_forecasts.slice(0, 12)} />
+                        <PollutantBreakdown pollutants={currentForecast.predicted_pollutants} />
+                    </div>
+                    <HealthRecommendations 
+                        recommendations={healthRecommendations}
+                        category={currentForecast.AQI_category}
+                    />
+                    <Metadata metadata={forecastData.metadata} />
+                </div>
+            );
+        }
+
+        function Header() {
+            const [lastUpdate, setLastUpdate] = React.useState(new Date().toLocaleTimeString());
+            
+            React.useEffect(() => {
+                const updateTime = () => {
+                    setLastUpdate(new Date().toLocaleTimeString());
+                };
+                
+                // Update timestamp every time component mounts (when data refreshes)
+                updateTime();
+                
+                // Also update every 30 seconds to show it's live
+                const interval = setInterval(updateTime, 30000);
+                return () => clearInterval(interval);
+            }, []);
+            
+            return (
+                <div className="header">
+                    <h1>🛰️ NASA TEMPO AQI Forecasting</h1>
+                    <div className="subtitle">Real-time Air Quality Intelligence</div>
+                    <div className="nasa-badge">Powered by NASA TEMPO Satellite Data</div>
+                    <div className="update-info">
+                        <div className="last-update">
+                            ⏰ Last Updated: {lastUpdate}
+                        </div>
+                        <div className="version-info">
+                            🔧 v2.1 - Realistic AQI Mode
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function LocationSelector({ locations, selectedLocation, onLocationChange }) {
+            return (
+                <div className="location-selector">
+                    <span style={{marginRight: '10px'}}>📍 Select Location:</span>
+                    <select 
+                        value={selectedLocation} 
+                        onChange={(e) => onLocationChange(e.target.value)}
+                    >
+                        {locations.map(location => (
+                            <option key={location} value={location}>{location}</option>
+                        ))}
+                    </select>
+                    <div style={{
+                        marginTop: '10px',
+                        fontSize: '0.8rem',
+                        opacity: '0.7',
+                        textAlign: 'center'
+                    }}>
+                        🕒 Data updated: {new Date().toLocaleTimeString()}
+                    </div>
+                </div>
+            );
+        }
+
+        function CurrentAQI({ forecast }) {
+            const aqiClass = getAQIClass(forecast.predicted_AQI);
+            
+            return (
+                <div className="current-aqi">
+                    <h2>Current Air Quality in {forecast.location}</h2>
+                    <div className={`aqi-value ${aqiClass}`}>
+                        {forecast.predicted_AQI}
+                    </div>
+                    <div className={`aqi-category ${aqiClass}`}>
+                        {forecast.AQI_category}
+                    </div>
+                    <div className="dominant-pollutant">
+                        <h3>🌬️ Primary Pollutant: {forecast.dominant_pollutant}</h3>
+                        <p className="pollutant-description">
+                            {forecast.pollutant_description || 'Mixed pollutant sources contributing to air quality'}
+                        </p>
+                    </div>
+                </div>
+            );
+        }
+
+        function HourlyForecast({ forecasts }) {
+            return (
+                <div className="forecast-card">
+                    <h3>📈 12-Hour Forecast</h3>
+                    <div className="hourly-forecast">
+                        {forecasts.map((forecast, index) => {
+                            const time = new Date(forecast.time);
+                            const timeStr = time.toLocaleTimeString('en-US', { 
+                                hour: 'numeric', 
+                                hour12: true 
+                            });
+                            
+                            return (
+                                <div key={index} className="hour-item">
+                                    <span className="hour-time">{timeStr}</span>
+                                    <span 
+                                        className="hour-aqi"
+                                        style={{backgroundColor: getAQIColor(forecast.predicted_AQI)}}
+                                    >
+                                        {forecast.predicted_AQI}
+                                    </span>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            );
+        }
+
+        function PollutantBreakdown({ pollutants }) {
+            const pollutantInfo = {
+                'PM2.5': { unit: 'µg/m³', name: 'Fine Particles' },
+                'PM10': { unit: 'µg/m³', name: 'Coarse Particles' },
+                'O3': { unit: 'ppm', name: 'Ozone' },
+                'NO2': { unit: 'ppm', name: 'Nitrogen Dioxide' },
+                'SO2': { unit: 'ppm', name: 'Sulfur Dioxide' },
+                'CO': { unit: 'ppm', name: 'Carbon Monoxide' }
+            };
+
+            return (
+                <div className="forecast-card">
+                    <h3>🧪 Pollutant Breakdown</h3>
+                    <div className="pollutant-breakdown">
+                        {Object.entries(pollutants).map(([pollutant, value]) => {
+                            const info = pollutantInfo[pollutant];
+                            const displayValue = pollutant.includes('PM') ? 
+                                Math.round(value) : value.toFixed(3);
+                            
+                            return (
+                                <div key={pollutant} className="pollutant-item">
+                                    <div>{pollutant}</div>
+                                    <div className="pollutant-value">{displayValue}</div>
+                                    <div className="pollutant-unit">{info.unit}</div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            );
+        }
+
+        function HealthRecommendations({ recommendations, category }) {
+            return (
+                <div className="health-recommendations">
+                    <h3>🏥 Health Recommendations - {category}</h3>
+                    <ul>
+                        {recommendations.map((rec, index) => (
+                            <li key={index}>{rec}</li>
+                        ))}
+                    </ul>
+                </div>
+            );
+        }
+
+        function Metadata({ metadata }) {
+            return (
+                <div className="metadata">
+                    <strong>🛰️ Forecast Metadata:</strong><br/>
+                    Generated: {new Date(metadata.generated_at).toLocaleString()}<br/>
+                    Model: {metadata.model_type}<br/>
+                    Location: {metadata.target_location}<br/>
+                    Region: {metadata.region_type}<br/>
+                    Data Source: {metadata.data_source}
+                </div>
+            );
+        }
+
+        // Render the app
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

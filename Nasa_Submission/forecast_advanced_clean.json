@@ -1,0 +1,423 @@
+{
+  "metadata": {
+    "generated_at": "2025-10-04T18:32:51Z",
+    "model_type": "random_forest",
+    "forecast_hours": 24
+  },
+  "hourly_forecasts": [
+    {
+      "time": "2025-10-04T00:00:00Z",
+      "forecast_hour": 1,
+      "predicted_AQI": 62,
+      "dominant_pollutant": "PM2.5",
+      "AQI_category": "Moderate",
+      "predicted_pollutants": {
+        "PM2.5": 17.192,
+        "PM10": 26.984,
+        "O3": 0.039,
+        "NO2": 0.027,
+        "SO2": 0.006,
+        "CO": 0.993
+      },
+      "individual_AQIs": {}
+    },
+    {
+      "time": "2025-10-04T01:00:00Z",
+      "forecast_hour": 2,
+      "predicted_AQI": 62,
+      "dominant_pollutant": "PM2.5",
+      "AQI_category": "Moderate",
+      "predicted_pollutants": {
+        "PM2.5": 17.192,
+        "PM10": 26.984,
+        "O3": 0.039,
+        "NO2": 0.027,
+        "SO2": 0.006,
+        "CO": 0.993
+      },
+      "individual_AQIs": {}
+    },
+    {
+      "time": "2025-10-04T02:00:00Z",
+      "forecast_hour": 3,
+      "predicted_AQI": 62,
+      "dominant_pollutant": "PM2.5",
+      "AQI_category": "Moderate",
+      "predicted_pollutants": {
+        "PM2.5": 17.192,
+        "PM10": 26.984,
+        "O3": 0.039,
+        "NO2": 0.027,
+        "SO2": 0.006,
+        "CO": 0.993
+      },
+      "individual_AQIs": {}
+    },
+    {
+      "time": "2025-10-04T03:00:00Z",
+      "forecast_hour": 4,
+      "predicted_AQI": 62,
+      "dominant_pollutant": "PM2.5",
+      "AQI_category": "Moderate",
+      "predicted_pollutants": {
+        "PM2.5": 17.192,
+        "PM10": 26.984,
+        "O3": 0.039,
+        "NO2": 0.027,
+        "SO2": 0.006,
+        "CO": 0.993
+      },
+      "individual_AQIs": {}
+    },
+    {
+      "time": "2025-10-04T04:00:00Z",
+      "forecast_hour": 5,
+      "predicted_AQI": 62,
+      "dominant_pollutant": "PM2.5",
+      "AQI_category": "Moderate",
+      "predicted_pollutants": {
+        "PM2.5": 17.192,
+        "PM10": 26.984,
+        "O3": 0.039,
+        "NO2": 0.027,
+        "SO2": 0.006,
+        "CO": 0.993
+      },
+      "individual_AQIs": {}
+    },
+    {
+      "time": "2025-10-04T05:00:00Z",
+      "forecast_hour": 6,
+      "predicted_AQI": 62,
+      "dominant_pollutant": "PM2.5",
+      "AQI_category": "Moderate",
+      "predicted_pollutants": {
+        "PM2.5": 17.192,
+        "PM10": 26.984,
+        "O3": 0.039,
+        "NO2": 0.027,
+        "SO2": 0.006,
+        "CO": 0.993
+      },
+      "individual_AQIs": {}
+    },
+    {
+      "time": "2025-10-04T06:00:00Z",
+      "forecast_hour": 7,
+      "predicted_AQI": 62,
+      "dominant_pollutant": "PM2.5",
+      "AQI_category": "Moderate",
+      "predicted_pollutants": {
+        "PM2.5": 17.192,
+        "PM10": 26.984,
+        "O3": 0.039,
+        "NO2": 0.027,
+        "SO2": 0.006,
+        "CO": 0.993
+      },
+      "individual_AQIs": {}
+    },
+    {
+      "time": "2025-10-04T07:00:00Z",
+      "forecast_hour": 8,
+      "predicted_AQI": 62,
+      "dominant_pollutant": "PM2.5",
+      "AQI_category": "Moderate",
+      "predicted_pollutants": {
+        "PM2.5": 17.192,
+        "PM10": 26.984,
+        "O3": 0.039,
+        "NO2": 0.027,
+        "SO2": 0.006,
+        "CO": 0.993
+      },
+      "individual_AQIs": {}
+    },
+    {
+      "time": "2025-10-04T08:00:00Z",
+      "forecast_hour": 9,
+      "predicted_AQI": 62,
+      "dominant_pollutant": "PM2.5",
+      "AQI_category": "Moderate",
+      "predicted_pollutants": {
+        "PM2.5": 17.192,
+        "PM10": 26.984,
+        "O3": 0.039,
+        "NO2": 0.027,
+        "SO2": 0.006,
+        "CO": 0.993
+      },
+      "individual_AQIs": {}
+    },
+    {
+      "time": "2025-10-04T09:00:00Z",
+      "forecast_hour": 10,
+      "predicted_AQI": 62,
+      "dominant_pollutant": "PM2.5",
+      "AQI_category": "Moderate",
+      "predicted_pollutants": {
+        "PM2.5": 17.192,
+        "PM10": 26.984,
+        "O3": 0.039,
+        "NO2": 0.027,
+        "SO2": 0.006,
+        "CO": 0.993
+      },
+      "individual_AQIs": {}
+    },
+    {
+      "time": "2025-10-04T10:00:00Z",
+      "forecast_hour": 11,
+      "predicted_AQI": 62,
+      "dominant_pollutant": "PM2.5",
+      "AQI_category": "Moderate",
+      "predicted_pollutants": {
+        "PM2.5": 17.192,
+        "PM10": 26.984,
+        "O3": 0.039,
+        "NO2": 0.027,
+        "SO2": 0.006,
+        "CO": 0.993
+      },
+      "individual_AQIs": {}
+    },
+    {
+      "time": "2025-10-04T11:00:00Z",
+      "forecast_hour": 12,
+      "predicted_AQI": 62,
+      "dominant_pollutant": "PM2.5",
+      "AQI_category": "Moderate",
+      "predicted_pollutants": {
+        "PM2.5": 17.192,
+        "PM10": 26.984,
+        "O3": 0.039,
+        "NO2": 0.027,
+        "SO2": 0.006,
+        "CO": 0.993
+      },
+      "individual_AQIs": {}
+    },
+    {
+      "time": "2025-10-04T12:00:00Z",
+      "forecast_hour": 13,
+      "predicted_AQI": 62,
+      "dominant_pollutant": "PM2.5",
+      "AQI_category": "Moderate",
+      "predicted_pollutants": {
+        "PM2.5": 17.192,
+        "PM10": 26.984,
+        "O3": 0.039,
+        "NO2": 0.027,
+        "SO2": 0.006,
+        "CO": 0.993
+      },
+      "individual_AQIs": {}
+    },
+    {
+      "time": "2025-10-04T13:00:00Z",
+      "forecast_hour": 14,
+      "predicted_AQI": 62,
+      "dominant_pollutant": "PM2.5",
+      "AQI_category": "Moderate",
+      "predicted_pollutants": {
+        "PM2.5": 17.192,
+        "PM10": 26.984,
+        "O3": 0.039,
+        "NO2": 0.027,
+        "SO2": 0.006,
+        "CO": 0.993
+      },
+      "individual_AQIs": {}
+    },
+    {
+      "time": "2025-10-04T14:00:00Z",
+      "forecast_hour": 15,
+      "predicted_AQI": 62,
+      "dominant_pollutant": "PM2.5",
+      "AQI_category": "Moderate",
+      "predicted_pollutants": {
+        "PM2.5": 17.192,
+        "PM10": 26.984,
+        "O3": 0.039,
+        "NO2": 0.027,
+        "SO2": 0.006,
+        "CO": 0.993
+      },
+      "individual_AQIs": {}
+    },
+    {
+      "time": "2025-10-04T15:00:00Z",
+      "forecast_hour": 16,
+      "predicted_AQI": 62,
+      "dominant_pollutant": "PM2.5",
+      "AQI_category": "Moderate",
+      "predicted_pollutants": {
+        "PM2.5": 17.192,
+        "PM10": 26.984,
+        "O3": 0.039,
+        "NO2": 0.027,
+        "SO2": 0.006,
+        "CO": 0.993
+      },
+      "individual_AQIs": {}
+    },
+    {
+      "time": "2025-10-04T16:00:00Z",
+      "forecast_hour": 17,
+      "predicted_AQI": 62,
+      "dominant_pollutant": "PM2.5",
+      "AQI_category": "Moderate",
+      "predicted_pollutants": {
+        "PM2.5": 17.192,
+        "PM10": 26.984,
+        "O3": 0.039,
+        "NO2": 0.027,
+        "SO2": 0.006,
+        "CO": 0.993
+      },
+      "individual_AQIs": {}
+    },
+    {
+      "time": "2025-10-04T17:00:00Z",
+      "forecast_hour": 18,
+      "predicted_AQI": 62,
+      "dominant_pollutant": "PM2.5",
+      "AQI_category": "Moderate",
+      "predicted_pollutants": {
+        "PM2.5": 17.192,
+        "PM10": 26.984,
+        "O3": 0.039,
+        "NO2": 0.027,
+        "SO2": 0.006,
+        "CO": 0.993
+      },
+      "individual_AQIs": {}
+    },
+    {
+      "time": "2025-10-04T18:00:00Z",
+      "forecast_hour": 19,
+      "predicted_AQI": 62,
+      "dominant_pollutant": "PM2.5",
+      "AQI_category": "Moderate",
+      "predicted_pollutants": {
+        "PM2.5": 17.192,
+        "PM10": 26.984,
+        "O3": 0.039,
+        "NO2": 0.027,
+        "SO2": 0.006,
+        "CO": 0.993
+      },
+      "individual_AQIs": {}
+    },
+    {
+      "time": "2025-10-04T19:00:00Z",
+      "forecast_hour": 20,
+      "predicted_AQI": 62,
+      "dominant_pollutant": "PM2.5",
+      "AQI_category": "Moderate",
+      "predicted_pollutants": {
+        "PM2.5": 17.192,
+        "PM10": 26.984,
+        "O3": 0.039,
+        "NO2": 0.027,
+        "SO2": 0.006,
+        "CO": 0.993
+      },
+      "individual_AQIs": {}
+    },
+    {
+      "time": "2025-10-04T20:00:00Z",
+      "forecast_hour": 21,
+      "predicted_AQI": 62,
+      "dominant_pollutant": "PM2.5",
+      "AQI_category": "Moderate",
+      "predicted_pollutants": {
+        "PM2.5": 17.192,
+        "PM10": 26.984,
+        "O3": 0.039,
+        "NO2": 0.027,
+        "SO2": 0.006,
+        "CO": 0.993
+      },
+      "individual_AQIs": {}
+    },
+    {
+      "time": "2025-10-04T21:00:00Z",
+      "forecast_hour": 22,
+      "predicted_AQI": 62,
+      "dominant_pollutant": "PM2.5",
+      "AQI_category": "Moderate",
+      "predicted_pollutants": {
+        "PM2.5": 17.192,
+        "PM10": 26.984,
+        "O3": 0.039,
+        "NO2": 0.027,
+        "SO2": 0.006,
+        "CO": 0.993
+      },
+      "individual_AQIs": {}
+    },
+    {
+      "time": "2025-10-04T22:00:00Z",
+      "forecast_hour": 23,
+      "predicted_AQI": 62,
+      "dominant_pollutant": "PM2.5",
+      "AQI_category": "Moderate",
+      "predicted_pollutants": {
+        "PM2.5": 17.192,
+        "PM10": 26.984,
+        "O3": 0.039,
+        "NO2": 0.027,
+        "SO2": 0.006,
+        "CO": 0.993
+      },
+      "individual_AQIs": {}
+    },
+    {
+      "time": "2025-10-04T23:00:00Z",
+      "forecast_hour": 24,
+      "predicted_AQI": 62,
+      "dominant_pollutant": "PM2.5",
+      "AQI_category": "Moderate",
+      "predicted_pollutants": {
+        "PM2.5": 17.192,
+        "PM10": 26.984,
+        "O3": 0.039,
+        "NO2": 0.027,
+        "SO2": 0.006,
+        "CO": 0.993
+      },
+      "individual_AQIs": {}
+    }
+  ],
+  "summary": {
+    "forecast_period": {
+      "start_time": "2025-10-04T00:00:00Z",
+      "end_time": "2025-10-04T23:00:00Z",
+      "total_hours": 24
+    },
+    "aqi_summary": {
+      "max_aqi": 62,
+      "min_aqi": 62,
+      "avg_aqi": 62.0,
+      "max_category": "Moderate"
+    },
+    "worst_hour": {
+      "time": "2025-10-04T00:00:00Z",
+      "aqi": 62,
+      "category": "Moderate",
+      "dominant_pollutant": "PM2.5"
+    },
+    "category_distribution": {
+      "Moderate": 24
+    },
+    "dominant_pollutants": {
+      "PM2.5": 24
+    },
+    "most_frequent_pollutant": "PM2.5",
+    "health_recommendations": [
+      "Air quality is moderate. Sensitive individuals should consider limiting prolonged outdoor exertion.",
+      "Generally safe for most outdoor activities."
+    ]
+  }
+}

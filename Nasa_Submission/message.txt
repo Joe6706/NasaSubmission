@@ -1,0 +1,45 @@
+# =============================================================================
+# DustIQ Data Pipeline Environment Configuration  
+# =============================================================================
+
+# NASA Earthdata Login Credentials (✅ CONFIGURED)
+# Get these from: https://urs.earthdata.nasa.gov/users/new
+EARTHDATA_USERNAME=zyaddjouad
+EARTHDATA_PASSWORD=#ecAMNkV.dr5iMS
+
+# LAADS DAAC Token for VIIRS data (✅ CONFIGURED)  
+# Get this from: https://ladsweb.modaps.eosdis.nasa.gov/profile/app-keys
+LAADS_TOKEN=eyJ0eXAiOiJKV1QiLCJvcmlnaW4iOiJFYXJ0aGRhdGEgTG9naW4iLCJzaWciOiJlZGxqd3RwdWJrZXlfb3BzIiwiYWxnIjoiUlMyNTYifQ.eyJ0eXBlIjoiVXNlciIsInVpZCI6Inp5YWRkam91YWQiLCJleHAiOjE3NjQ3ODczOTYsImlhdCI6MTc1OTYwMzM5NiwiaXNzIjoiaHR0cHM6Ly91cnMuZWFydGhkYXRhLm5hc2EuZ292IiwiaWRlbnRpdHlfcHJvdmlkZXIiOiJlZGxfb3BzIiwiYWNyIjoiZWRsIiwiYXNzdXJhbmNlX2xldmVsIjozfQ.3XOw6DDsdioInILpurXZCSrQHcXkRkQmGzNRijqdLXjRmr_1BFiIuP2pfaVO8v6xyjSYoEMc2eDS9gJB4jA0SFGcJsLFSfwD4Yd9eTt9op7KaPkHIQZEmxhOsRcfMA0XGX0v9r1mVIX4s1Ko2rRitkoXucHfLzb2dn7JaCH2aqd-eBSjATs6hVnybqOpkyO-AsS0Vvsz2as-kJ_DVxbA9FT-hCDco5M9p0On8u9pYVOrddxO8oZeuqpp40pbGiTNX-Wy75zjsZG8Hyp0SDlO-c423E12_JEl2440m28KOYh2kp6VBTWSPXF6aOZkEjdqZPmb8vmNf06X7AUsfRvVdQ
+
+# OpenAQ API Key (required for v3 API)
+# Get this from: https://docs.openaq.org (registration required)
+OPENAQ_API_KEY=82fe5b7b926da79a7c86a4963b8c28a98459d11ba0d8911db83fe159fc9253a5
+
+# =============================================================================
+# GEOGRAPHIC AND TEMPORAL CONFIGURATION
+# =============================================================================
+# North America bounding box: west, south, east, north
+BBOX=-130,20,-60,55
+START_DATE=2025-09-01
+END_DATE=2025-10-05
+GRID_RESOLUTION=0.125
+
+# =============================================================================
+# DATA STORAGE CONFIGURATION
+# =============================================================================
+DATA_ROOT_PATH=./data
+DATA_RAW_DIR=data/raw
+DATA_PROCESSED_DIR=data/processed
+MODELS_DIR=models
+TARGET_REGION=north_america
+FORECAST_HORIZON_DAYS=3
+
+# =============================================================================
+# API SETTINGS
+# =============================================================================
+MAX_MISSING_RATIO=0.3
+MIN_RECORDS_PER_DAY=12
+OPENAQ_RATE_LIMIT=1.0
+LOG_LEVEL=INFO
+ENABLE_VALIDATION=true
+ENABLE_CACHING=true

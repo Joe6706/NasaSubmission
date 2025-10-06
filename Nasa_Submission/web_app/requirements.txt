@@ -1,0 +1,22 @@
+# NASA TEMPO AQI Web App Dependencies
+# Core web server
+Flask==2.3.3
+Werkzeug==2.3.7
+
+# Optional: For enhanced deployment
+gunicorn==21.2.0
+waitress==2.1.2
+
+# System requirements (already available in Python standard library)
+# - http.server
+# - socketserver
+# - json
+# - urllib.parse
+# - datetime
+# - random
+# - hashlib
+# - pathlib
+# - os
+
+# Production deployment
+psutil==5.9.5
